@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kết quả so khớp</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 40px;
+                background: #f2f2f2;
+                text-align: center;
+            }
+            h2 {
+                margin-bottom: 20px;
+            }
+            .images {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+            .image-block {
+                background: white;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 0 5px gray;
+            }
+            img {
+                width: 200px;
+                height: auto;
+                margin-bottom: 10px;
+            }
+            .back-button {
+                margin-top: 40px;
+                display: inline-block;
+                padding: 10px 20px;
+                background: #3498db;
+                color: white;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Ảnh dấu vân tay đầu vào</h2>
+        <div class="images">
+            <div class="image-block">
+                <img src="{{ query_image }}" alt="Query Image" />
+            </div>
+        </div>
+
+        <h2>Top 3 ảnh giống nhất trong cơ sở dữ liệu</h2>
+        <div class="images">
+            {% for item in top3 %}
+            <div class="image-block">
+                <img
+                    src="{{ url_for('static', filename='dataset/' + item.image) }}"
+                    alt="{{ item.image }}"
+                />
+                <div><strong>{{ item.image }}</strong></div>
+                <div>Độ tương đồng: {{ item.similarity }}%</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('index') }}" class="back-button">🔙 Quay lại</a>
+    </body>
+</html>
