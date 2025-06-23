@@ -118,7 +118,7 @@ def match():
 
         max_score = max(score for _, score in top3) + 1e-6
         top3_display = [
-            {"image": name, "similarity": f"{(1 - score / max_score) * 100:.2f}"}
+            {"image": name, "similarity": f"{score:.2f}"}
             for name, score in top3
         ]
 
