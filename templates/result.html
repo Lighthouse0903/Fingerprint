@@ -1,67 +1,44 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Kết quả so khớp</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                padding: 40px;
-                background: #f2f2f2;
-                text-align: center;
-            }
-            h2 {
-                margin-bottom: 20px;
-            }
-            .images {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 30px;
-            }
-            .image-block {
-                background: white;
-                padding: 10px;
-                border-radius: 8px;
-                box-shadow: 0 0 5px gray;
-            }
-            img {
-                width: 200px;
-                height: auto;
-                margin-bottom: 10px;
-            }
-            .back-button {
-                margin-top: 40px;
-                display: inline-block;
-                padding: 10px 20px;
-                background: #3498db;
-                color: white;
-                border-radius: 5px;
-                text-decoration: none;
-            }
-        </style>
-    </head>
-    <body>
-        <h2>Ảnh dấu vân tay đầu vào</h2>
-        <div class="images">
-            <div class="image-block">
-                <img src="{{ query_image }}" alt="Query Image" />
-            </div>
-        </div>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả so khớp vân tay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
-        <h2>Top 3 ảnh giống nhất trong cơ sở dữ liệu</h2>
-        <div class="images">
-            {% for item in top3 %}
-            <div class="image-block">
-                <img
-                    src="{{ url_for('static', filename='dataset/' + item.image) }}"
-                    alt="{{ item.image }}"
-                />
-                <div><strong>{{ item.image }}</strong></div>
-                <div>Độ tương đồng: {{ item.similarity }}%</div>
+        <section class="query-section">
+            <h2>Ảnh dấu vân tay đầu vào</h2>
+            <div class="images">
+                <div class="image-block">
+                    <img src="{{ query_image }}" alt="Ảnh vân tay đầu vào" />
+                    <div class="image-name">Vân tay cần tìm kiếm</div>
+                </div>
             </div>
-            {% endfor %}
-        </div>
+        </section>
 
-        <a href="{{ url_for('index') }}" class="back-button">🔙 Quay lại</a>
-    </body>
+        <section class="results-section">
+            <h2>Top 3 ảnh giống nhất trong cơ sở dữ liệu</h2>
+            <div class="images">
+                {% for item in top3 %}
+                <div class="image-block">
+                    <img src="{{ url_for('static', filename='dataset/' + item.image) }}" alt="{{ item.image }}" />
+                    <div class="image-name">{{ item.image }}</div>
+                    <div class="similarity">
+                        <i class="fas fa-fingerprint"></i> 
+                        Chỉ số độ lệch: {{ item.similarity }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <div class="actions">
+            <a href="{{ url_for('index') }}" class="back-button">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+</body>
 </html>

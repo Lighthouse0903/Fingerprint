@@ -65,7 +65,7 @@ def extract_query_minutiae(image_path):
 
 def fetch_db_minutiae():
     conn = pyodbc.connect(
-        r"DRIVER={ODBC Driver 17 for SQL Server};SERVER=laptopHAIDANG\MAIN_SERVER;DATABASE=FingerprintDB;Trusted_Connection=yes;"
+        r"DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-3G1MNP7\DWDM;DATABASE=FingerprintDB;UID=sa;PWD=123456"
     )
     cursor = conn.cursor()
     cursor.execute("SELECT image_name, x, y, type, orientation FROM minutiae")

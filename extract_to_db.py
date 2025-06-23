@@ -9,10 +9,10 @@ import pyodbc
 from pathlib import Path
 from skimage.morphology import skeletonize
 
-server = "laptopHAIDANG\\MAIN_SERVER"
+server = "DESKTOP-3G1MNP7\DWDM"
 database = "FingerprintDB"
 username = "sa"
-password = "09032003Hdn)"
+password = "123456"
 
 conn = pyodbc.connect(
     "DRIVER={ODBC Driver 17 for SQL Server};"
